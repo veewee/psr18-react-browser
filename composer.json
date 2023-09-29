@@ -1,0 +1,29 @@
+{
+    "name": "veewee/psr18-react-browser",
+    "description": "A small PSR-18 bridge for react browser",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Veewee\\Psr18ReactBrowser\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Toon Verwerft",
+            "email": "toonverwerft@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "~8.1 || ~8.2",
+        "react/http": "^1.9",
+        "react/async": "^4.1",
+        "psr/http-client": "^1.0"
+    },
+    "provide": {
+        "psr/http-client-implementation": "^1"
+    },
+    "require-dev": {
+        "vimeo/psalm": "^5.15"
+    }
+}

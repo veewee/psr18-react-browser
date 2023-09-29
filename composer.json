@@ -18,12 +18,33 @@
         "php": "~8.1 || ~8.2",
         "react/http": "^1.9",
         "react/async": "^4.1",
-        "psr/http-client": "^1.0"
+        "psr/http-client": "^1.0",
+        "veewee/composer-run-parallel": "^1.2"
     },
     "provide": {
         "psr/http-client-implementation": "^1"
     },
     "require-dev": {
-        "vimeo/psalm": "^5.15"
+        "vimeo/psalm": "^5.15",
+        "phpunit/phpunit": "^10.3",
+        "friendsofphp/php-cs-fixer": "^3.30",
+        "symfony/process": "^6.3",
+        "nyholm/psr7": "^1.8"
+    },
+    "config": {
+        "allow-plugins": {
+            "veewee/composer-run-parallel": true
+        }
+    },
+    "scripts": {
+        "cs": "PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --dry-run",
+        "cs:fix": "PHP_CS_FIXER_IGNORE_ENV=1 ./vendor/bin/php-cs-fixer fix",
+        "psalm": "./vendor/bin/psalm --no-cache --stats",
+        "tests": "./vendor/bin/phpunit --coverage-text --color",
+        "ci": "@parallel cs psalm tests",
+        "functional-testserver": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -S 127.0.0.1:8000 -t tests/Fixtures/functional/server"
+        ]
     }
 }

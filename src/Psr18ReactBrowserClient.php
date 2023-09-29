@@ -13,7 +13,7 @@ final class Psr18ReactBrowserClient implements ClientInterface
 {
     public function __construct(
         private readonly Browser $browser
-    ){
+    ) {
     }
 
     public static function default(): self
@@ -23,7 +23,7 @@ final class Psr18ReactBrowserClient implements ClientInterface
 
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
-        return await(
+        $response = await(
             $this->browser->request(
                 $request->getMethod(),
                 (string) $request->getUri(),
@@ -31,5 +31,9 @@ final class Psr18ReactBrowserClient implements ClientInterface
                 (string) $request->getBody()
             )
         );
+
+        assert($response instanceof ResponseInterface);
+
+        return $response;
     }
 }
